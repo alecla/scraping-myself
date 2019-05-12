@@ -13,10 +13,13 @@ void (async () => {
         await page.pdf({path: './pdfs/page1.pdf'});
 
         const me = await page.evaluate(() => {
-            return document.querySelectorAll('p')[0].innerText;
+            return ({
+                title: document.querySelector('h1').innerText,
+                description: document.querySelector('p').innerText
+            })
         })
 
-        console.log(`about me lul: ${JSON.stringify(me)}`)
+        console.log(`Content: ${JSON.stringify(me)}`)
 
         await browser.close();
     } catch (err) {
